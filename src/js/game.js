@@ -27,7 +27,7 @@ export class Game extends Engine {
         }
 
         for (let index = 0; index < 5; index++) {
-            this.addActor(Resources.Shark.toSprite(), 1000, 10j);
+            this.addActor(Resources.Shark.toSprite(), 1000, 10);
         }
 
         
