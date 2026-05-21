@@ -1,37 +1,16 @@
-import {Actor, Engine, Vector, Color, Sprite} from "excalibur";
-import {Resources, ResourceLoader} from "./resources";
+import {Color, Vector} from "excalibur";
+import {Fish} from "./fish";
 import {Player} from "./player";
 
-export class ScaryFish extends Actor {
-  posX;
-  posY;
-  velX;
-  velY;
+export class ScaryFish extends Fish {
   constructor() {
-    super({width: 100, height: 100});
-    this.pos = new Vector(50, 100);
+    super();
+    this.sprite.tint = Color.Red;
   }
 
-  onInitialize(engine) {
-    const sprite = new Sprite({image: Resources.Fish});
-    sprite.tint = Color.Red;
-    this.graphics.use(sprite);
-
-    this.posX = Math.random() * engine.drawWidth;
-    this.posY = Math.random() * engine.drawHeight;
-
-    this.velX = Math.random() * -90 - 30;
-    this.velY = Math.random() * 100 - 50;
-
-    this.pos = new Vector(this.posX, this.posY);
-    this.vel = new Vector(this.velX, this.velY);
-
-    this.events.on("exitviewport", (e) => this.fishLeft(e));
-  }
-  fishLeft(e) {
-    this.pos = new Vector(
-      this.scene?.engine.drawWidth + 100 + 50 * Math.random(),
-      this.posY,
-    );
+  onCollisionStart(engine, other) {
+    if (other.owner instanceof Player) {
+      this.actions.moveTo(new Vector(this.pos.x - 300, this.pos.y + 200, 200));
+    }
   }
 }

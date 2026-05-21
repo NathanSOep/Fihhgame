@@ -1,21 +1,21 @@
 import {Actor, Engine, Vector} from "excalibur";
 import {Resources, ResourceLoader} from "./resources";
+import {Player} from "./player";
 
 export class Fish extends Actor {
   posX;
   posY;
   velX;
   velY;
+  sprite;
   constructor() {
     super({width: 100, height: 100});
     this.pos = new Vector(50, 100);
-  }
+    this.sprite = Resources.Fish.toSprite();
+    this.graphics.use(this.sprite);
 
-  onInitialize(engine) {
-    this.graphics.use(Resources.Fish.toSprite());
-
-    this.posX = Math.random() * engine.drawWidth;
-    this.posY = Math.random() * engine.drawHeight;
+    this.posX = Math.random() * 800;
+    this.posY = Math.random() * 600;
 
     this.velX = Math.random() * -90 - 30;
     this.velY = Math.random() * 100 - 50;
@@ -27,9 +27,15 @@ export class Fish extends Actor {
   }
 
   fishLeft(e) {
+    this.vel = new Vector(Math.random() * -90 - 30, Math.random() * 100 - 50);
     this.pos = new Vector(
       this.scene?.engine.drawWidth + 100 + 50 * Math.random(),
       this.posY,
     );
+  }
+  onCollisionStart(engine, other) {
+    if (other.owner instanceof Player) {
+      this.kill();
+    }
   }
 }

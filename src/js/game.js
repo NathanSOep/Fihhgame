@@ -1,10 +1,10 @@
 import "../css/style.css";
 import {Actor, Engine, Vector, DisplayMode, Resource} from "excalibur";
 import {Resources, ResourceLoader} from "./resources.js";
+import {ScaryFish} from "./scaryFish.js";
 import {Fish} from "./fish.js";
 import {Mine} from "./mine.js";
 import {Player} from "./player.js";
-import {ScaryFish} from "./scaryFish.js";
 
 export class Game extends Engine {
   constructor() {
@@ -22,17 +22,14 @@ export class Game extends Engine {
     const player = new Player();
     this.add(player);
     for (let i = 0; i < 3; i++) {
-      const mine = new Mine();
-      this.add(mine);
+      this.add(new Mine());
     }
 
     for (let i = 0; i < 50; i++) {
-      const fish = new Fish();
-      this.add(fish);
+      this.add(new Fish());
     }
     for (let i = 0; i < 10; i++) {
-      const scaryFish = new ScaryFish();
-      this.add(scaryFish);
+      this.add(new ScaryFish());
     }
   }
 }

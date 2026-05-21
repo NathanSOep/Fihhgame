@@ -19,10 +19,6 @@ export class Player extends Actor {
   }
 
   hitSomething(event) {
-    if (event.other.owner instanceof Fish) {
-      event.other.owner.kill();
-      this.score++;
-    }
     if (event.other.owner instanceof Mine) {
       this.kill();
       event.other.owner.kill();
