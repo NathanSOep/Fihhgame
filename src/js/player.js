@@ -23,12 +23,12 @@ export class Player extends Actor {
       this.kill();
       event.other.owner.kill();
     }
-    if (event.other.owner instanceof ScaryFish) {
-      event.other.owner.actions.moveTo(300, -300, 200);
-      event.other.owner.velX = Math.random() * -90 - 30;
-      event.other.owner.velY = Math.random() * 100 - 50;
+    if (event.other.owner instanceof Fish) {
+      this.score++;
+      this.scene.scoreLabel.text = "Score: " + this.score;
     }
   }
+
   onPreUpdate(engine) {
     let xspeed = 0;
     let yspeed = 0;

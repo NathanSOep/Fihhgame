@@ -10,7 +10,11 @@ export class ScaryFish extends Fish {
 
   onCollisionStart(engine, other) {
     if (other.owner instanceof Player) {
-      this.actions.moveTo(new Vector(this.pos.x - 300, this.pos.y + 200, 200));
+      this.flee();
     }
+  }
+  flee() {
+    this.actions.moveBy(new Vector(300, -200), 200);
+    this.vel = new Vector(this.velX, this.velY);
   }
 }

@@ -5,6 +5,8 @@ import {ScaryFish} from "./scaryFish.js";
 import {Fish} from "./fish.js";
 import {Mine} from "./mine.js";
 import {Player} from "./player.js";
+import {StartScene} from "./scenes/startScene.js";
+import {levelOne} from "./scenes/levelOne.js";
 
 export class Game extends Engine {
   constructor() {
@@ -18,19 +20,10 @@ export class Game extends Engine {
   }
 
   startGame() {
-    console.log("start de game!");
-    const player = new Player();
-    this.add(player);
-    for (let i = 0; i < 3; i++) {
-      this.add(new Mine());
-    }
+    this.addScene("start", new StartScene());
+    this.addScene("levelOne", new levelOne());
 
-    for (let i = 0; i < 50; i++) {
-      this.add(new Fish());
-    }
-    for (let i = 0; i < 10; i++) {
-      this.add(new ScaryFish());
-    }
+    this.goToScene("start");
   }
 }
 
